@@ -1,5 +1,44 @@
+//client id: 23385f4af386c7a
+
+//client secret: a9c40f8b08e0aa6995adfc90e6bfb415ef9c519a
+
+//data.images[0]
+
 'use strict';
 $(document).ready(function(){
+
+  var pics = [];
+  var tracker;
+
+$.ajax({
+  url: 'https://api.imgur.com/3/album/DDoWy.json',
+  method: 'GET',
+  headers: {
+    'Authorization': 'Client-ID 23385f4af386c7a'
+  }
+})
+.done(function(res) {
+  pics = res.data.images;
+  console.log(pics);
+
+  for (var i = 0; i < pics.length; i++) {
+    photoArray[i] = new Photo(pics[i].link);
+  }
+  console.log(photoArray);
+  tracker = new Tracker();
+
+  catData[0].value = tracker.leftPhoto.vote;
+  catData[1].value = tracker.rightPhoto.vote;
+
+  rightPhoto.click(tracker.rightVote);
+  leftPhoto.click(tracker.leftVote);
+  $('#reset').click(tracker.reset);
+
+  tracker.displayPhotos();
+})
+.fail(function(err) {
+  console.log(err);
+});
 
 
   var catData = [
@@ -15,7 +54,7 @@ $(document).ready(function(){
   ];
 
   var catOptions = {
-    segmentShowStroke : false,
+    segmentShowStroke : true,
     percentageInnerCutout: 50,
     animateScale : true
   };
@@ -30,22 +69,22 @@ $(document).ready(function(){
   }
 
   //new objects
-  var pic1 = new Photo('img/1.jpg');
-  var pic2 = new Photo('img/2.jpg');
-  var pic3 = new Photo('img/3.jpg');
-  var pic4 = new Photo('img/4.jpg');
-  var pic5 = new Photo('img/5.jpg');
-  var pic6 = new Photo('img/6.jpg');
-  var pic7 = new Photo('img/7.jpg');
-  var pic8 = new Photo('img/8.jpg');
-  var pic9 = new Photo('img/9.jpg');
-  var pic10 = new Photo('img/10.jpg');
-  var pic11 = new Photo('img/11.jpg');
-  var pic12 = new Photo('img/12.jpg');
-  var pic13 = new Photo('img/13.jpg');
-  var pic14 = new Photo('img/14.jpg');
+  // var pic1 = new Photo('img/1.jpg');
+  // var pic2 = new Photo('img/2.jpg');
+  // var pic3 = new Photo('img/3.jpg');
+  // var pic4 = new Photo('img/4.jpg');
+  // var pic5 = new Photo('img/5.jpg');
+  // var pic6 = new Photo('img/6.jpg');
+  // var pic7 = new Photo('img/7.jpg');
+  // var pic8 = new Photo('img/8.jpg');
+  // var pic9 = new Photo('img/9.jpg');
+  // var pic10 = new Photo('img/10.jpg');
+  // var pic11 = new Photo('img/11.jpg');
+  // var pic12 = new Photo('img/12.jpg');
+  // var pic13 = new Photo('img/13.jpg');
+  // var pic14 = new Photo('img/14.jpg');
 
-  var photoArray =[pic1,pic2,pic3,pic4,pic5,pic6,pic7,pic8,pic9,pic10,pic11,pic12,pic13,pic14];
+  var photoArray =[];
 
   var rightPhoto = $('#rightPhoto');
 
@@ -58,23 +97,18 @@ $(document).ready(function(){
   var Tracker = function(){
     this.leftPhoto = photoArray[randomPic()];
     this.rightPhoto = photoArray[randomPic()];
-    console.log(this.leftPhoto);
-    console.log(this.rightPhoto);
 
     while (this.leftPhoto.path === this.rightPhoto.path) {
       this.rightPhoto = photoArray[randomPic()];
     }
   };
 
-  var tracker = new Tracker();
-  catData[0].value = tracker.leftPhoto.vote;
-  catData[1].value = tracker.rightPhoto.vote;
-
   Tracker.prototype.rightVote = function(){
     tracker.rightPhoto.vote++
     //console.log(tracker.rightPhoto.vote);
     catChart.segments[0].value = tracker.rightPhoto.vote;
     catChart.update();
+     $("#reset").show();
   };
 
   Tracker.prototype.leftVote = function(){
@@ -82,6 +116,7 @@ $(document).ready(function(){
     //console.log(tracker.leftPhoto.vote);
     catChart.segments[1].value = tracker.leftPhoto.vote;
     catChart.update();
+    $("#reset").show();
   };
 
   Tracker.prototype.reset = function(){
@@ -103,13 +138,12 @@ $(document).ready(function(){
     var leftContent = '<img src="' + this.leftPhoto.path + '" />';
     rightPhoto.html(rightContent);
     leftPhoto.html(leftContent);
+    $("#reset").hide();
   }
 
-  rightPhoto.click(tracker.rightVote);
-  leftPhoto.click(tracker.leftVote);
-  $('#reset').click(tracker.reset);
 
 
-  tracker.displayPhotos();
+
+
 
 });

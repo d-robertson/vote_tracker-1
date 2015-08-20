@@ -4,34 +4,85 @@
 body{
 	width: 80%;
 	margin-left: 10%;
+	background-color: #ED64DB;
 }
+
+#divHeader {
+
+}
+
 #header{
-	text-align: center;;
+	text-align: center;
 	font-size: 72px;
 }
 #leftPhoto{
 	float: left;
 }
-#leftPhoto::hover {
+
+#leftPhoto:hover {
 	padding: 20px;
 	background-color: blue;
 }
 
 #rightPhoto{
 	float: right;
+
 }
-#rightPhoto::hover {
+
+#rightPhoto:hover {
+	padding: 20px;
 	background-color: red;
 }
 
+#divChart {
+	width: 300px;
+	height: 300px;
+	margin: auto;
+	background-image: url("../img/rsz_1rsz_birneykirk.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+
+}
+
 #catChart{
-	margin-left: 35%;
+	width: 500px;
+	height: 500px;
+	position: relative;
+	margin-top: -377px;
+	margin-left: 340px;
+
+	/*padding: 50px;*/
 }
+
+#button {
+
+}
+
 #reset{
-	width: 100px;
-	height: 50px;
-	background-color: white;
+	  background: #d9aa34;
+  background-image: -webkit-linear-gradient(top, #d9aa34, #000000);
+  background-image: -moz-linear-gradient(top, #d9aa34, #000000);
+  background-image: -ms-linear-gradient(top, #d9aa34, #000000);
+  background-image: -o-linear-gradient(top, #d9aa34, #000000);
+  background-image: linear-gradient(to bottom, #d9aa34, #000000);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 34px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
 }
+
 #reset:hover{
-	background-color: #D3D3D3;
+	 background: #b9fc3c;
+  background-image: -webkit-linear-gradient(top, #b9fc3c, #3498db);
+  background-image: -moz-linear-gradient(top, #b9fc3c, #3498db);
+  background-image: -ms-linear-gradient(top, #b9fc3c, #3498db);
+  background-image: -o-linear-gradient(top, #b9fc3c, #3498db);
+  background-image: linear-gradient(to bottom, #b9fc3c, #3498db);
+  text-decoration: none;
 }
+
